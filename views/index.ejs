@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Control de Notas</title>
+    <link rel="stylesheet" href="/estilos.css">
+</head>
+<body>
+
+    <h2>Lista de Notas de Alumnos</h2>
+
+    <form action="/" method="GET">
+        <input type="text" name="buscar" placeholder="Buscar alumno..." value="<%= busqueda %>">
+        <button type="submit">Buscar</button>
+        <a href="/"><button type="button" class="btn-limpiar">Limpiar</button></a>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Alumno</th>
+                <th>Materia</th>
+                <th>Nota</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (alumnos.length > 0) { %>
+                <% alumnos.forEach(alumno => { %>
+                    <tr>
+                        <td><%= alumno.nombre %></td>
+                        <td><%= alumno.materia %></td>
+                        <td><%= alumno.nota %></td>
+                    </tr>
+                <% }) %>
+            <% } else { %>
+                <tr>
+                    <td colspan="3" class="sin-resultados">No se encontraron alumnos con ese nombre.</td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestión de Usuarios</title>
+    <link rel="stylesheet" href="/css/estilos.css">
+</head>
+<body>
+
+    <h1>Administración de Usuarios</h1>
+
+    <h2>Agregar Nuevo Usuario</h2>
+    <form action="/usuarios" method="POST">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+        
+        <label for="edad">Edad:</label>
+        <input type="number" id="edad" name="edad" required>
+        
+        <button type="submit">Guardar Usuario</button>
+    </form>
+
+    <h2>Lista de Usuarios</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Edad</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% if (listaUsuarios.length === 0) { %>
+                <tr>
+                    <td colspan="4">No hay usuarios registrados en el sistema.</td>
+                </tr>
+            <% } else { %>
+                <% listaUsuarios.forEach(function(usuario) { %>
+                    <tr>
+                        <td><%= usuario.id %></td>
+                        <td><%= usuario.nombre %></td>
+                        <td><%= usuario.edad %></td>
+                        <td>
+                            <form action="/usuarios/eliminar/<%= usuario.id %>" method="POST" style="margin: 0;">
+                                <button type="submit" class="btn-eliminar" onclick="return confirm('¿Seguro que querés eliminar a este usuario?');">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                <% }); %>
+            <% } %>
+        </tbody>
+    </table>
+
+</body>
+</html>
